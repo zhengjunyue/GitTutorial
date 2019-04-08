@@ -1,0 +1,60 @@
+
+1. Initialization & Change
+
+cd <A repository>
+git config --global user.name "zhengjunyue"
+git config --global user.email "z.yue@sheffield.ac.uk"
+
+git init
+touch 1.py #build a new file
+git status
+git add 1.py  (git add .)
+git status
+git commit -m "create 1.py"  
+
+2. Log & Diff
+
+git log # Check the changed stuff
+git diff #查看还未add的修改
+
+git add .   # add 全部修改文件
+git diff --cached # 查看已add的修改
+
+3. 修改已 commit 的版本
+git add 2.py
+git commit --amend --no-edit   # "--no-edit": 不编辑, 直接合并到上一个 commit
+git log --oneline    # "--oneline": 每个 commit 内容显示在一行
+
+4. Reset 回到 add 之前
+git reset 1.py
+
+5. Reset 回到 commit 之前 
+git reset --hard HEAD^
+git log --oneline
+git reset --hard <commit id>
+
+git reflog # 又反悔
+
+6. 回到从前 (checkout 针对单个文件)
+我们仅仅要对 1.py 进行回到过去操作, 回到 c6762a1 change 1 这一个 commit. 
+使用 checkout + id c6762a1 + -- + 文件目录 1.py, 我们就能将 1.py 的指针 HEAD 放在这个时刻 c6762a1
+
+7. Branch
+git branch dev  或者 git checkout -b dev  # 建立 dev 分支
+git branch        # 查看当前分支
+git checkout dev #移动分支
+
+git checkout master   # 切换至 master 才能把其他分支合并过来
+git merge --no-ff -m "keep merge info" dev         # 保留 merge 信息
+$ git log --oneline --graph
+
+7. rebase 分支冲突
+
+8. 连接本地版本库
+git remote add origin <库的网址>
+git push -u origin master     # 推送本地 master 去 origin （online管理库）
+git push -u origin dev        # 推送本地 dev  去 origin
+
+9. 推送修改 
+git commit -am "change 5"
+git push -u origin master
